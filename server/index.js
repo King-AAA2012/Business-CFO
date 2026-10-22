@@ -1,4 +1,10 @@
 process.removeAllListeners('warning'); // hide node:sqlite experimental notice
+// node:sqlite works without flags from Node 22.13 / 23.4.
+const [maj, min] = process.versions.node.split('.').map(Number);
+if (maj < 22 || (maj === 22 && min < 13) || (maj === 23 && min < 4)) {
+  console.error(`\n  AI Business CFO needs Node.js 22.13 or newer (you have ${process.versions.node}).\n  Download the LTS version from https://nodejs.org and try again.\n`);
+  process.exit(1);
+}
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -48,7 +54,11 @@ app.use((err, req, res, next) => {
 
 const lan = () => Object.values(os.networkInterfaces()).flat().filter(i => i && i.family === 'IPv4' && !i.internal).map(i => i.address);
 
-http.createServer(app).listen(PORT, () => {
+http.createServer(app).on('error', e => {
+  if (e.code !== 'EADDRINUSE') throw e;
+  console.log(`\n  Port ${PORT} is busy. AI Business CFO is probably already running: open http://localhost:${PORT}\n  (or start with a different port, e.g. PORT=4610)\n`);
+  process.exit(0);
+}).listen(PORT, () => {
   console.log(`\n  AI Business CFO running`);
   console.log(`  This computer : http://localhost:${PORT}`);
   startHttps().catch(e => console.log('  HTTPS disabled:', e.message));

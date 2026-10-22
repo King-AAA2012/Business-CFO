@@ -4,14 +4,29 @@ Billing, inventory, barcodes, bank/UPI reconciliation, GST and an AI CFO for Ind
 
 ## Run
 
+Needs [Node.js](https://nodejs.org) 22.13 or newer (the LTS download is fine).
+
+### Windows
+Double-click `start.bat`.
+
+### Mac
+1. Download: green **Code** button → **Download ZIP** on GitHub, and unzip it (or `git clone https://github.com/King-AAA2012/Business-CFO.git`).
+2. Double-click **`start.command`**.
+   - The first time, macOS may say it "cannot be opened because it is from an unidentified developer". Right-click (or Control-click) `start.command` → **Open** → **Open**. You only do this once.
+   - If it says you don't have permission, open Terminal in the folder and run `chmod +x start.command`, or just run `bash start.command`.
+3. If Node.js is missing, the launcher offers to install it with Homebrew, or opens nodejs.org so you can install it.
+4. The first run installs components (about a minute), then the app opens in your browser. Keep the Terminal window open while you use it; close it to stop.
+
+### Any system (terminal)
 ```
 npm install
 npm start
 ```
 
 - This computer: http://localhost:4600
-- Phones on the same Wi-Fi: `https://<your-PC-IP>:4643` (printed at startup). Accept the certificate warning once. HTTPS is needed for the phone camera scanner.
-- Or double-click `start.bat`.
+- Phones on the same Wi-Fi: `https://<your-computer-IP>:4643` (printed at startup). Accept the certificate warning once. HTTPS is needed for the phone camera scanner.
+- Different port: `PORT=4610 npm start` (Mac/Linux) or `set PORT=4610 && npm start` (Windows).
+- On a Mac, allow incoming connections if macOS asks, so phones can reach it.
 
 First visit creates the owner account. Add staff under Settings → Staff.
 
