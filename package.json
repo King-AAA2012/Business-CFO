@@ -1,0 +1,19 @@
+{
+  "name": "ai-business-cfo",
+  "version": "1.0.0",
+  "description": "AI Business CFO: inventory, GST billing, bank/UPI reconciliation, barcode scanning",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bwip-js": "^4.11.4",
+    "express": "^5.3.0",
+    "html5-qrcode": "^2.3.8",
+    "selfsigned": "^5.5.0"
+  }
+}
